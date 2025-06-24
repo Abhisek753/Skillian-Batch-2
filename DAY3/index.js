@@ -27,7 +27,7 @@ app.get("/post",(req,res)=>{
 
 app.post("/post",(req,res)=>{
     const newPost=req.body;
-    //save this data in database;
+    //save this data in database and logic;
     
     console.log("new user Data",newPost)
     res.send({message:"new post is available",userId:newPost.Id});
