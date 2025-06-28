@@ -7,18 +7,22 @@ app.use(express.json())
 
 
 app.get("/",(req,res,next)=>{
-    res.send("Hello Skillians you are here");
+    res.status(200).send("Hello Skillians you are here");
+    //logic this did not work show some error 400 401
+    
     });
+
 app.get("/users",(req,res)=>{
     res.send({"name":"Abhisek"});
     });
 
 app.post("/users",(req,res)=>{
     const newUser=req.body;
+    console.log(newUser);
     //save this data in database;
     
-    console.log("new user Data",newUser)
-    res.send({message:"new user",user:newUser.name});
+    console.log("new user Data",newUser);
+    res.send({message:"new user",user:newUser.postname});
 });
 
 app.get("/post",(req,res)=>{
