@@ -10,7 +10,7 @@ app.get("/home",(req,res)=>{
     res.send("home page is yet to complete");
 })
 
-app.use("/auth",authRoute)
+app.use("/auth",authRoute);
 
 app.use("/products",productRoute);
 
