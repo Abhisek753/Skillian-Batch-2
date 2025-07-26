@@ -1,5 +1,5 @@
 {
-  "name": "day5",
+  "name": "day7jwt",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,8 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^17.1.0",
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.0",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.16.4",
     "nodemon": "^3.1.10"
   }
 }

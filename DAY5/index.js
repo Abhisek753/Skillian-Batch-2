@@ -1,21 +1,22 @@
 const express=require("express");
 const port=3001;
 const productRoutes=require("./routes/productRoutes")
+const userRoutes=require("./routes/userRoutes");
 
 const app=express()
 app.use(express.json());
 
 
-const logger=(req,res,next)=>{
-    console.log(`${new Date()} ${req.method} ${req.url}`);
-    next()
-}
-const logger2=(req,res,next)=>{
-    console.log(`${new Date()} 1111111111111111111 ${req.method} ${req.url}`);
-    next()
-}
-app.use(logger);
-app.use(logger2);
+// const logger=(req,res,next)=>{
+//     console.log(`${new Date()} ${req.method} ${req.url}`);
+//     next()
+// }
+// const logger2=(req,res,next)=>{
+//     console.log(`${new Date()} 1111111111111111111 ${req.method} ${req.url}`);
+//     next()
+// }
+// app.use(logger);
+// app.use(logger2);
 
 
 
@@ -25,7 +26,7 @@ app.get("/",(req,res)=>{
 
 app.use("/products",productRoutes)
 
-
+app.use("/users",userRoutes);
 
 
 app.listen(port ,()=>{
