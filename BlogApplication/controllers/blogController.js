@@ -3,13 +3,20 @@ const Blog =require("../models/Blogs")
 exports.createBlog=async (req,res)=>{
     try{
      const {title,content}=req.body;
-     const blog=new Blog({
+    let imageUrl=null;
+ console.log(req.file)
+
+    if(req.file){
+      imageUrl=`uploads/${req.file.filename}`
+    }
+    const blog=new Blog({
         title,
         content,
-        author:req.user.id
+        author:req.user.id,
+        image:imageUrl
      });
-     console.log(blog,"blog data 111111111")
-     await blog.save();
+     console.log(blog,"11111");
+    await blog.save();
      res.status(201).json(blog);
      
     }catch(err){
@@ -20,7 +27,8 @@ exports.createBlog=async (req,res)=>{
 exports.getBlogs=async (req,res)=>{
     try{
      const blogs =await Blog.find();
-     req.status(200).json(blogs)
+     console.log(blogs,"blog")
+     res.status(200).json(blogs)
     
 
     }catch(err){
@@ -58,4 +66,18 @@ exports.updateBlogs=async (req,res)=>{
     }catch(err){
               res.status(500).json({error:err});
     }
+}
+
+exports.deleteBlogs=async(req,res)=>{
+   
+  try{
+      const deleteBlog=await Blog.findByIdAndDelete(req.params.id);
+         if(!deleteBlog){
+        return res.status(404).json({message:"blog not found"});
+   }
+      res.status(200).json({message:"Blog deleted successsfully",blog:deleteBlog});
+  }catch(err){
+       res.status(500).json({error:err});
+  }
+
 }

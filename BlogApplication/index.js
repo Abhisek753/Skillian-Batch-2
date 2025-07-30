@@ -6,10 +6,13 @@ const authRoute=require("./routes/authRoutes")
 const blogRoutes =require("./routes/blogRoutes")
 const app=express();
 app.use(express.json());
-
+const path=require("path");
 app.get("/home",(req,res)=>{
     res.send("home page is yet to complete");
 })
+app.use("/upload",express.static(path.join(__dirname,"uploads")));
+// app.use(express.static("uploads"))
+
 
 app.use("/auth",authRoute);
 
