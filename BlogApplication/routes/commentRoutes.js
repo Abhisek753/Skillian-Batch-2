@@ -8,6 +8,8 @@ router.get("/",commentController.getComment);
 router.get("/blog/:blogId",commentController.getCommentsByBlog);
 
 router.post("/", authMiddleware,commentController.createComment);
+router.put("/:commentId", authMiddleware,commentController.updateComment);
+
 
 
 module.exports=router;
