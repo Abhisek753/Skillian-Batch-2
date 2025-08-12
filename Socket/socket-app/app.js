@@ -40,3 +40,8 @@ connectDB().then(()=>{
 }).catch(err=>{
     console.log(err)
 })
+
+
+
+//email spelling was wrong in user model and fixed it
+//and in app.listen write server.listen
