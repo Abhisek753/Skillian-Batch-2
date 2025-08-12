@@ -15,6 +15,7 @@ module.exports=(io,socket)=>{
    socket.on("addUser", async (userData)=>{
      try{
        const user=await useController.addUserSocket(userData);
+       console.log(user);
        socket.emit("userAdded",user);
        const users=await useController.getUsers();
        io.emit("user",users);

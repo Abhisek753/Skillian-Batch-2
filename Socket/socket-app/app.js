@@ -1,12 +1,14 @@
 require("dotenv").config();
+const cors=require("cors");
 const express=require("express");
 const http=require("http");
 const {Server}=require("socket.io");
 const connectDB =require("./config/db");
 const userSocketHandler=require("./socketHandlers/userSocket")
-PORT=process.env.PORT;
+const PORT = process.env.PORT || 5001;
 const app=express()
 app.use(express.json());
+app.use(cors());
 
 app.get("/home",(req,res)=>{
     res.send("home page is running");
@@ -32,7 +34,9 @@ io.on("connection",(socket)=>{
 
 
 connectDB().then(()=>{
-    app.listen(PORT,()=>{
-        console.log(`Server is running at ${PORT}`)
-    })
+    server.listen(PORT,()=>{
+        console.log(`Server is running at ${PORT}`);
+    });
+}).catch(err=>{
+    console.log(err)
 })
