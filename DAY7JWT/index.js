@@ -14,6 +14,8 @@ app.use("/auth",authRoute);
 
 app.use("/products",productRoute);
 
+app.use("/blogs",blogRoutes);
+
 connectDB().then(()=>{
 app.listen(process.env.PORT,()=>{
     console.log("server is running at 3001");
