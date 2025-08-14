@@ -24,5 +24,16 @@ module.exports=(io,socket)=>{
      }
 
    })
+   socket.on("editUser", async (userData)=>{
+    //  try{
+    //    const user=await useController.addUserSocket(userData);
+    //    console.log(user,"user created");
+    //    socket.emit("userAdded",user);
+    //    const users=await useController.getUsers();
+    //    io.emit("user",users);
+    //  }catch(err){
+    //    socket.emit("userNotAdded",{error:err.message}); 
+    //  }
 
+   })
 }
