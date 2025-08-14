@@ -5,9 +5,9 @@ module.exports=(io,socket)=>{
     socket.on("getUsers",async ()=>{
         try{
           const users=await useController.getUsers()
-          socket.emit("users",users);
+          socket.emit("user",users);
         }catch(err){
-          socket.emit("users",[]);
+          socket.emit("user",[]);
         }
     })
 
@@ -15,12 +15,12 @@ module.exports=(io,socket)=>{
    socket.on("addUser", async (userData)=>{
      try{
        const user=await useController.addUserSocket(userData);
-       console.log(user);
+       console.log(user,"user created");
        socket.emit("userAdded",user);
        const users=await useController.getUsers();
        io.emit("user",users);
      }catch(err){
-       socket.emit("user not added added",{error:err.message})
+       socket.emit("userNotAdded",{error:err.message}); 
      }
 
    })

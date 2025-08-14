@@ -25,10 +25,10 @@ const io=new Server(server,{
 
 // register user socket handlers
 io.on("connection",(socket)=>{
-    console.log("Client connected");
+    console.log("Client connected",socket.id);
     userSocketHandler(io,socket);
  socket.on("disconnect",()=>{
-    console.log("client disconnected")
+    console.log("client disconnected");
  })
 })
 
