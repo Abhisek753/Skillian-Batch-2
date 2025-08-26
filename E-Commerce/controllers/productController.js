@@ -80,10 +80,60 @@ exports.getProductById=async (req,res)=>{
   
 };
 exports.updateProduct=async (req,res)=>{
-    
+    try{
+      const {name,description,category,price,stock}=req.body;
+      const product= await Product.findById(req.params.id);
+      if(!product){
+        return   res.status(404).json({message:"Product not found"})
+      }
+      console.log("Found Product:", product);
+      product.name=name || product.name;
+      product.description=description || product.description;
+      product.category=category || product.category;
+      product.price=price || product.price;
+      product.stock=stock || product.stock;
+      console.log("Updated Product:", product);
+      if(req.files && req.files.length>0){
+         product.image.forEach(image=>{
+          const imagePath=path.join(__dirname," ",image);
+          if(fs.existsSync(imagePath)){
+            fs.unlink(imagePath,err=>{
+              if(err){
+                console.log("Error in deleting the files",err)
+              }
+            })
+          }
+         })
+         product.image=req.files.map(file=>file.path);
+      }
+    const updateProduct= await product.save();
+      res.status(200).json({message:"Product Updated Successfully",product:updateProduct})
+
+    }catch(err){
+      res.status(500).json({message:"Error in updating the product"})
+    }
   
 };
 exports.deleteProduct=async (req,res)=>{
-    
+    try{
+      const product= await Product.findById(req.params.id);
+      if(!product){
+        return   res.status(404).json({message:"Product not found"})
+      }
+      //delete images from uploads folder
+      if(product.image && product.image.length>0){
+        product.image.forEach(imagePath=>{
+            fs.unlink(imagePath,err=>{
+                if(err){
+                    console.log("Error in deleting the files",err)
+                }
+            })
+        })
+      }
+      res.status(200).json({message:"Product Deleted Successfully",product})
+
+    }catch(err){
+      res.status(500).json({message:"Error in deleting the product",error:err})
+    }
   
 };
