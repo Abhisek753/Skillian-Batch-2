@@ -4,7 +4,7 @@ const Category = require("../models/Category");
 exports.createCategory = async (req, res) => {
     try {
         const { name, description } = req.body;
-        
+        console.log(name,description)
         // Validate input
         if (!name || !description) {
             return res.status(400).json({ message: 'Name and description are required' });

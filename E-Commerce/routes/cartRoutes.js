@@ -7,8 +7,8 @@ const authMiddleWare = require("../middlewares/authMiddleware");
 // Get user's cart
 router.get("/", authMiddleWare, cartController.getCartProducts);
 
-// Add or update items in cart
-router.post("/", authMiddleWare, cartController.addOrUpdateCartItems);
+// Add items to cart
+router.post("/", authMiddleWare, cartController.addToCart);
 
 // Update cart item quantity
 router.put("/:productId/quantity", authMiddleWare, cartController.updateCartItemQuantity);
